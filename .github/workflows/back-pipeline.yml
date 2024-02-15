@@ -1,4 +1,4 @@
-name: Deployment Pipeline
+name: Deployment Back Pipeline
 
 on:
   pull_request:
@@ -8,6 +8,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./back
     steps:
       - uses: actions/checkout@v4
         with:

@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: Echo the message
         run: |
-          echo "Hola mundo! Desde el front!"
+          echo "Hola mundo!"
