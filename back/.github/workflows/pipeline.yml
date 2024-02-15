@@ -1,0 +1,28 @@
+name: Deployment Pipeline
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version: '>=16'
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        with:
+          static_site_generator: next
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run eslint
+      - name: Build with Next.js
+        run: npm run build
