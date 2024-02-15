@@ -1,0 +1,1 @@
+[![Say hello](https://github.com/814942/Pokedex-challenge/actions/workflows/main.yml/badge.svg)](https://github.com/814942/Pokedex-challenge/actions/workflows/main.yml)
