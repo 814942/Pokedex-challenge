@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-require("dotenv").config();
+require("dotenv/config");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
-    res.send('Hello, this is Express + TypeScript');
+    res.send('Hello, Natural Tech House');
 });
 app.listen(port, () => {
     console.log(`[Server]: I am running at https://localhost:${port}`);
