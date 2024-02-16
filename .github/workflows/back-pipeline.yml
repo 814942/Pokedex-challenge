@@ -8,13 +8,15 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./back
+    # defaults:
+    #   run:
+    #     shell: bash
+    #     working-directory: ./back
     steps:
       - uses: actions/checkout@v4
         with:
+          sparse-checkout: './back'
+          sparse-checkout-cone-mode: false
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
