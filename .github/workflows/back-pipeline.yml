@@ -8,10 +8,10 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     shell: bash
-    #     working-directory: ./back
+    defaults:
+      run:
+        shell: bash
+        working-directory: "./back"
     steps:
       - uses: actions/checkout@v4
         with:
