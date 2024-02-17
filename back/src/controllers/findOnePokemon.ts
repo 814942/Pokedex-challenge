@@ -1,27 +1,28 @@
 import { Request, Response } from "express";
 import axios from "axios"
+
 import { IAbility, IHabilidad, IPokemonStats, IPokemonsDataAPI, IPokemonsDataResponse, ITypes } from "../interface";
 const URL = "https://pokeapi.co/api/v2/pokemon"
 
 const findOnePokemon = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { data }: IPokemonsDataAPI = await axios.get(`${URL}/${id}`);
+  try {
+    const { id } = req.params;
+    const { data }: IPokemonsDataAPI = await axios.get(`${URL}/${id}`);
 
-  if (data) {
-    const [
-      puntos_vida, 
-      ataque, 
-      defensa, 
-      ataque_especial, 
-      defensa_especial, 
-      velocidad 
-    ]: IPokemonStats[] = data.stats
+    if (data) {
+      const [
+        puntos_vida, 
+        ataque, 
+        defensa, 
+        ataque_especial, 
+        defensa_especial, 
+        velocidad 
+      ]: IPokemonStats[] = data.stats
 
-    const habilidadesPromises = data.abilities!.map(async ({ ability }: IAbility): Promise<IHabilidad> => {
-      const { name, url } = ability;
-      const defaultHabilidad: IHabilidad = { nombre: name, efecto: "N/A", descripcion: "N/A" };
+      const habilidadesPromises = data.abilities!.map(async ({ ability }: IAbility): Promise<IHabilidad> => {
+        const { name, url } = ability;
+        const defaultHabilidad: IHabilidad = { nombre: name, efecto: "N/A", descripcion: "N/A" };
 
-      try {
         const { data: abilityData } = await axios.get(url);
 
         for (const entry of abilityData.effect_entries) {
@@ -35,33 +36,31 @@ const findOnePokemon = async (req: Request, res: Response) => {
         }
         // If no English entry found, return default
         return defaultHabilidad;
-        } catch (error) {
-            console.error(`Error fetching data for ${name}:`, error);
-            return defaultHabilidad; // Return default on error
-        }
-    });
-    const abilitiesResult: IHabilidad[] = await Promise.all(habilidadesPromises);
+      });
+      const abilitiesResult: IHabilidad[] = await Promise.all(habilidadesPromises);
 
-    const dataMapped: IPokemonsDataResponse = {
-      id: data.id,
-      experiencia: data.base_experience,
-      nombre: data.name,
-      puntos_vida: puntos_vida.base_stat,
-      ataque: ataque.base_stat,
-      ataque_especial: ataque_especial.base_stat,
-      defensa: defensa.base_stat,
-      defensa_especial: defensa_especial.base_stat,
-      velocidad: velocidad.base_stat,
-      altura: data.height,
-      peso: data.weight,
-      tipo: data.types.map((ele: ITypes) => ele.type.name),
-      imagen_frente: data.sprites.other["official-artwork"].front_default,
-      habilidades: abilitiesResult
+      const dataMapped: IPokemonsDataResponse = {
+        id: data.id,
+        nombre: data.name,
+        puntos_vida: puntos_vida.base_stat,
+        ataque: ataque.base_stat,
+        ataque_especial: ataque_especial.base_stat,
+        defensa: defensa.base_stat,
+        defensa_especial: defensa_especial.base_stat,
+        velocidad: velocidad.base_stat,
+        altura: data.height,
+        peso: data.weight,
+        tipo: data.types.map((ele: ITypes) => ele.type.name),
+        habilidades: abilitiesResult
+      }
+      return res.status(200).send(dataMapped)
+    } 
+    else {
+      return res.status(404).send([])
     }
-    return res.status(200).send(dataMapped)
-  } 
-  else {
-    return res.status(200).send([])
+  } catch (error) {
+    console.error(`Error fetching data in findOnePokemon:`, error);
+    return res.status(500).json({ message: "Internal server error" })
   }
 }
 

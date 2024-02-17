@@ -42,7 +42,7 @@ interface ISprites {
 
 export interface IPokemonsDataResponse {
   id: number;
-  experiencia: number;
+  experiencia?: number;
   nombre: string;
   puntos_vida: number;
   ataque: number;
@@ -53,7 +53,7 @@ export interface IPokemonsDataResponse {
   altura: number;
   peso: number;
   tipo: string[];
-  imagen_frente: string;
+  imagen_frente?: string;
   habilidades?: IHabilidad[];
 }
 
