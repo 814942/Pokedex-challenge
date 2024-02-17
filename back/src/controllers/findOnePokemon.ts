@@ -6,25 +6,41 @@ const URL = "https://pokeapi.co/api/v2/pokemon"
 const findOnePokemon = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { data }: IPokemonsDataAPI = await axios.get(`${URL}/${id}`);
-    const [puntos_vida, ataque, defensa, ataque_especial, defensa_especial, velocidad ]: IPokemonStats[] = data.stats
 
-    const habilidades = data.abilities!.map(async({ ability }: IAbility): Promise<IHabilidad> => {
-      const { name, url } = ability
-      let habilidad = {nombre: name, efecto: "N/A", descripcion: "N/A"}
-      const { data } =  await axios.get(url)
+  if (data) {
+    const [
+      puntos_vida, 
+      ataque, 
+      defensa, 
+      ataque_especial, 
+      defensa_especial, 
+      velocidad 
+    ]: IPokemonStats[] = data.stats
 
-        for (const entry of data.effect_entries) {
+    const habilidadesPromises = data.abilities!.map(async ({ ability }: IAbility): Promise<IHabilidad> => {
+      const { name, url } = ability;
+      const defaultHabilidad: IHabilidad = { nombre: name, efecto: "N/A", descripcion: "N/A" };
+
+      try {
+        const { data: abilityData } = await axios.get(url);
+
+        for (const entry of abilityData.effect_entries) {
             if (entry.language.name === "en") {
-              habilidad = {
-                nombre: name,
-                efecto: entry.short_effect,
-                descripcion: entry.effect
-              }
+                return {
+                    nombre: name,
+                    efecto: entry.short_effect,
+                    descripcion: entry.effect
+                };
             }
         }
-        return habilidad
-    })
-    const abilitiesResult: IHabilidad[] = await Promise.all(habilidades)
+        // If no English entry found, return default
+        return defaultHabilidad;
+        } catch (error) {
+            console.error(`Error fetching data for ${name}:`, error);
+            return defaultHabilidad; // Return default on error
+        }
+    });
+    const abilitiesResult: IHabilidad[] = await Promise.all(habilidadesPromises);
 
     const dataMapped: IPokemonsDataResponse = {
       id: data.id,
@@ -42,7 +58,11 @@ const findOnePokemon = async (req: Request, res: Response) => {
       imagen_frente: data.sprites.other["official-artwork"].front_default,
       habilidades: abilitiesResult
     }
-  return res.status(200).send(dataMapped)
+    return res.status(200).send(dataMapped)
+  } 
+  else {
+    return res.status(200).send([])
+  }
 }
 
 export default findOnePokemon
