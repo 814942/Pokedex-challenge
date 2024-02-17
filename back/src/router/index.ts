@@ -1,42 +1,37 @@
-import { Router, Request, Response } from "express";
-import getAllPokemons from "../controllers/getAllPokemons";
-import findOnePokemon from "../controllers/findOnePokemon";
+import { Router } from "express";
+
+import routerSecurity from "./routerSecurity";
+import routerPokemons from "./routerPokemons";
+
+import verifyToken from "../middlewares/verifyToken";
 
 const router = Router();
 
-/**
- * @swagger
- * /protected:
- *  get:
- *    summary: Saluda al invitado
- *    security: 
- *      - apiAuth: []
- *    tags:
- *      - Hello
- *    responses: 
- *      200:
- *        description: Saludo exitoso
- *      403:
- *        description: Problema de autentificacion. Token no provisto.
- *      500:
- *        description: Error interno
- */
-router.get("/", (req: Request, res: Response) => {
-  res.send('Hello, Natural Tech House');
-})
-
-router.get("/pokemons", getAllPokemons)
-
-router.get("/pokemons/:id", findOnePokemon)
-
-export default router;
+router.use("/security", routerSecurity)
+router.use("/protected", verifyToken, routerPokemons)
 
 /**
  * @swagger
  * components:
  *  securitySchemes:
- *    apiAuth:
- *      type: bearer token
- *      in: header
- *      name: Authorization
+ *    bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
  */
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    LoginSchema:
+ *      type: object
+ *      properties:
+ *        username:
+ *          type: string
+ *          descripcion: Nombre del usuario.
+ *      requied:
+ *        - username
+ */
+
+export default router

@@ -4,9 +4,7 @@ import swaggerSpec from './swagger';
 import cors from "cors";
 import 'dotenv/config'
 
-import verifyToken from './middlewares/verifyToken';
-import router from "./router";
-import login from './controllers/login';
+import router from './router';
 const { PORT } = process.env
 
 const server: Express = express();
@@ -24,8 +22,7 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 
 // router
-server.post("/login", login);
-server.use('/protected', verifyToken, router);
+server.use('/', router);
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Error catching endware.
