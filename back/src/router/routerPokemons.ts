@@ -1,6 +1,6 @@
 import { Router } from "express";
 import getAllPokemons from "../controllers/getAllPokemons";
-import findOnePokemon from "../controllers/findOnePokemon";
+import getPokemonByName from "../controllers/getPokemonByName";
 
 const routerPokemons = Router();
 /**
@@ -23,22 +23,21 @@ const routerPokemons = Router();
 routerPokemons.get("/pokemons", getAllPokemons)
 /**
  * @swagger
- * /protected/pokemons/{id}:
+ * /protected/pokemon/{name}:
  *  get:
- *    summary: Obtener un pokemon por id o nombre
+ *    summary: Obtener un pokemon por el nombre
  *    security: 
  *      - bearerAuth: []
  *    tags:
  *      - Pokemons
  *    parameters:
  *      - in: path
- *        name: id
+ *        name: name
  *        required: true
- *        description: id o nombre del Pokemon buscado
+ *        description: nombre del Pokemon buscado
  *        schema:
- *          oneOf:
- *            - type: string
- *            - type: integer
+ *          type:
+ *            string
  *    responses: 
  *      200:
  *        description: Pokemon encontrado.
@@ -49,6 +48,6 @@ routerPokemons.get("/pokemons", getAllPokemons)
  *      500:
  *        description: Error interno del servidor.
  */
-routerPokemons.get("/pokemons/:id", findOnePokemon)
+routerPokemons.get("/pokemon/:name", getPokemonByName)
 
 export default routerPokemons;

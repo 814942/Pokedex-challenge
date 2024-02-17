@@ -4,19 +4,23 @@ import axios from "axios"
 import { IAbility, IHabilidad, IPokemonStats, IPokemonsDataAPI, IPokemonsDataResponse, ITypes } from "../interface";
 const URL = "https://pokeapi.co/api/v2/pokemon"
 
-const findOnePokemon = async (req: Request, res: Response) => {
+const getPokemonByName = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const { data }: IPokemonsDataAPI = await axios.get(`${URL}/${id}`);
+    const { name } = req.params;
+    const { data }: IPokemonsDataAPI = await axios.get(`${URL}/${name}`)
 
+    /* 
+    Esta condicional esta un poco de mas ya que si no encuentra el pokemon buscado 
+    la API se rompe y cae en el catch
+    */
     if (data) {
       const [
-        puntos_vida, 
-        ataque, 
-        defensa, 
-        ataque_especial, 
-        defensa_especial, 
-        velocidad 
+        puntos_vida,
+        ataque,
+        defensa,
+        ataque_especial,
+        defensa_especial,
+        velocidad
       ]: IPokemonStats[] = data.stats
 
       const habilidadesPromises = data.abilities!.map(async ({ ability }: IAbility): Promise<IHabilidad> => {
@@ -53,15 +57,18 @@ const findOnePokemon = async (req: Request, res: Response) => {
         tipo: data.types.map((ele: ITypes) => ele.type.name),
         habilidades: abilitiesResult
       }
-      return res.status(200).send(dataMapped)
+      return res.status(200).send({ message: "Pokemon encontrados", data: dataMapped })
     } 
     else {
-      return res.status(404).send([])
+      return res.status(404).send({ message: "Pokemon encontrados", data: [] })
     }
   } catch (error) {
-    console.error(`Error fetching data in findOnePokemon:`, error);
-    return res.status(500).json({ message: "Internal server error" })
+    if (error instanceof Error) {
+      console.error(`Error fetching data in findOnePokemon: `, error.stack);
+      return res.status(404).json({ message: error.message, data: [] })
+    }
+    return res.status(500).json({ message: "Internal server error", data: [] })
   }
 }
 
-export default findOnePokemon
+export default getPokemonByName
