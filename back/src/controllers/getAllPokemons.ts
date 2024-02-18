@@ -1,39 +1,27 @@
 import { Request, Response } from "express";
 import axios from "axios"
 
-import { IPokemonStats, IPokemonsDataAPI, IPokemonsDataResponse, IStat, ITypes } from "../interface";
+import getPokemons from "../helper/getPokemons";
 
 const URL = "https://pokeapi.co/api/v2/pokemon"
 
 const getAllPokemons = async (req: Request, res: Response) => {
   try {
-    const { data } = await axios.get(URL);
-    const dataPokemon = data.results.map((pokemon: IStat) => axios.get(pokemon.url));
-    const result = await Promise.all(dataPokemon)
-    const resultMapped = result.map(({ data }: IPokemonsDataAPI): IPokemonsDataResponse => {
-      const [puntos_vida, ataque, defensa ]: IPokemonStats[] = data.stats
+    const { page } = req.query;
+    let offset: number = 0;
+    const pageSize = 15
+    if (page) {
+      offset = (Number(page) - 1) * 15;
+    }
 
-      return {
-        id: data.id,
-        experiencia: data.base_experience,
-        nombre: data.name,
-        puntos_vida: puntos_vida.base_stat,
-        ataque: ataque.base_stat,
-        defensa: defensa.base_stat,
-        altura: data.height,
-        peso: data.weight,
-        tipo: data.types.map(({ type }: ITypes) => type.name),
-        imagen_frente: data.sprites.other["official-artwork"].front_default,
-      }
-    })
+    const { data } = await axios.get(`${URL}?limit=${pageSize}&offset=${offset}`);
+
+    const result = await getPokemons(data.results);
 
     return res.status(200).send({ 
-      count: data.count,
-      next: data.next,
-      previous: data.previous,
-      data: resultMapped
-    })
-  
+      count: Math.ceil(data.count / pageSize),
+      data: result
+    });
   } catch (error) {
     console.error(`Error fetching data in findOnePokemon:`, error);
     return res.status(500).json({ message: "Internal server error" })
