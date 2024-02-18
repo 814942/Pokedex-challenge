@@ -36,3 +36,5 @@ server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 server.listen(port, () => {
   console.log(`[Server]: I am running at https://localhost:${port}`);
 });
+
+export default server

@@ -21,7 +21,7 @@ const getAllTypes = async (req: Request, res: Response) => {
       typesMapped.push(type)
     }
 
-    return res.status(200).send({ message: "Tipo de Pokemones", data: typesMapped })
+    return res.status(200).json({ message: "Tipo de Pokemones", data: typesMapped })
   } catch (error) {
     return res.status(500).json({ message: "Internal server error", data: [] })
   }

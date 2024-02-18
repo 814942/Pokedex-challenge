@@ -57,14 +57,13 @@ const getPokemonByName = async (req: Request, res: Response) => {
         tipo: data.types.map((ele: ITypes) => ele.type.name),
         habilidades: abilitiesResult
       }
-      return res.status(200).send({ message: "Pokemon encontrados", data: dataMapped })
+      return res.status(200).json({ message: "Pokemon encontrados", data: dataMapped })
     } 
     else {
-      return res.status(404).send({ message: "Pokemon encontrados", data: [] })
+      return res.status(404).json({ message: "Pokemon encontrados", data: [] })
     }
   } catch (error) {
     if (error instanceof Error) {
-      console.error(`Error fetching data in findOnePokemon: `, error.stack);
       return res.status(404).json({ message: error.message, data: [] })
     }
     return res.status(500).json({ message: "Internal server error", data: [] })
