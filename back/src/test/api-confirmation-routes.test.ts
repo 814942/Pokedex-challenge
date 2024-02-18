@@ -1,5 +1,5 @@
 import supertest from "supertest";
-import server from '../src/server';
+import server from '../server';
 
 import jwt from "jsonwebtoken";
 
