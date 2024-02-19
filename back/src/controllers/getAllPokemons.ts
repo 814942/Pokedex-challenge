@@ -18,7 +18,7 @@ const getAllPokemons = async (req: Request, res: Response) => {
 
     const result = await getPokemons(data.results);
 
-    return res.status(200).send({ 
+    return res.status(200).json({ 
       count: Math.ceil(data.count / pageSize),
       data: result
     });

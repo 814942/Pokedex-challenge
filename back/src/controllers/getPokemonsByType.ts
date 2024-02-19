@@ -26,13 +26,13 @@ const getPokemonsByType = async (req: Request, res: Response) => {
       const dataMapped = paginatedPokemons.map((types: any) => types.pokemon)
       const result = await getPokemons(dataMapped);
 
-      return res.status(200).send({ 
+      return res.status(200).json({ 
         count: Math.ceil(data.pokemon.length / pageSize),
         data: result
       });
     }
     else {
-      return res.status(404).send({ 
+      return res.status(404).json({ 
         count: 0,
         data: []
       });
