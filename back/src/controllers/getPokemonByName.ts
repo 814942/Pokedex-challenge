@@ -57,10 +57,10 @@ const getPokemonByName = async (req: Request, res: Response) => {
         tipo: data.types.map((ele: ITypes) => ele.type.name),
         habilidades: abilitiesResult
       }
-      return res.status(200).json({ message: "Pokemon encontrados", data: dataMapped })
+      return res.status(200).json({ message: "Pokemon encontrado", data: dataMapped })
     } 
     else {
-      return res.status(404).json({ message: "Pokemon encontrados", data: [] })
+      return res.status(404).json({ message: "Pokemon no encontrado", data: [] })
     }
   } catch (error) {
     if (error instanceof Error) {

@@ -4,7 +4,7 @@ const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   transformIgnorePatterns: [
-    '/node_modules/(?!my-module).+\\.js$'
+    '/node_modules/(?!my-module).+\\.ts$'
   ],
 };
 
