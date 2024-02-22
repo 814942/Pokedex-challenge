@@ -59,23 +59,23 @@ const Details = ({ params }: IDetailsProps) => {
           <div className="flex justify-around text-cs-white m-4 bg-terciary border-2 border-solid border-cs-gray-100 rounded-2xl shadow-2xl">
             <div className="p-4">
             <p className="bg-transparent">Puntos de combate </p>
-            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.ataque}</p>
+            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.ataque} Pts</p>
             <p className="bg-transparent">Ataque especial </p>
-            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.ataque_especial}</p>
+            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.ataque_especial} Pts</p>
             <p className="bg-transparent">Defensa </p>
-            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.defensa}</p>
+            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.defensa} Pts</p>
             <p className="bg-transparent">Defensa especial</p>
-            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.defensa_especial}</p>
+            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.defensa_especial} Pts</p>
             </div>
             <div className="p-4">
             <p className="bg-transparent">Puntos de vida </p>
-            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.puntos_vida}</p>
+            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.puntos_vida} Pts</p>
             <p className="bg-transparent">Altura </p>
-            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.altura}</p>
+            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.altura} Ft</p>
             <p className="bg-transparent">Peso </p>
-            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.peso}</p>
+            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.peso} Lb</p>
             <p className="bg-transparent">Velocidad </p>
-            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.velocidad}</p>
+            <p className="bg-transparent text-cs-gray-300 p-1">{pokemon?.data.velocidad} Pts</p>
             </div>
           </div>
         </div>
