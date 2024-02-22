@@ -55,7 +55,8 @@ const getPokemonByName = async (req: Request, res: Response) => {
         altura: data.height,
         peso: data.weight,
         tipo: data.types.map((ele: ITypes) => ele.type.name),
-        habilidades: abilitiesResult
+        habilidades: abilitiesResult,
+        imagen_frente: data.sprites.other["official-artwork"].front_default
       }
       return res.status(200).json({ message: "Pokemon encontrado", data: dataMapped })
     } 

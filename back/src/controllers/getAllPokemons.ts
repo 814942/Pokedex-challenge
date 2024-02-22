@@ -23,7 +23,7 @@ const getAllPokemons = async (req: Request, res: Response) => {
       data: result
     });
   } catch (error) {
-    console.error(`Error fetching data in findOnePokemon:`, error);
+    console.error(`Error fetching data in getAllPokemons:`, error);
     return res.status(500).json({ message: "Internal server error" })
   }
 }
