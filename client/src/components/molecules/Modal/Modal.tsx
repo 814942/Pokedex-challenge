@@ -38,7 +38,7 @@ const Modal = ({ setIsOpen }: IModalProps) => {
       }
       setIsOpen(false)
     }
-  }, [data])
+  }, [data, setIsOpen])
 
   return (
     <div className="max-w-80 p-8 text-cs-white	shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] rounded-2xl	border-0	text-center fixed top-1/2	left-1/2 translate-x-[-50%]	translate-y-[-50%] bg-gradient-to-r from-[#FF416C] to-[#FF4B2B]">

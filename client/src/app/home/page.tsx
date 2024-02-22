@@ -32,7 +32,7 @@ const HomePage = () => {
       setPreviousPokemons!(pokemons.data!)
       setTotalPages(pokemons?.count!)
     }
-  }, [pokemons])
+  }, [pokemons, setAllPokemons, setPreviousPokemons])
 
   return allPokemons?.length ? (
     <>

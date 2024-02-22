@@ -67,7 +67,7 @@ const Navbar = () => {
         toast.warning("No existe pokemon con ese nombre")
       }
     }
-  }, [pokemon])
+  }, [pokemon, setAllPokemons])
   useEffect(() => {
     if (pokemonTypes) {
       if (pokemonTypes.status === 200) {
@@ -77,7 +77,7 @@ const Navbar = () => {
         toast.warning("No existe ese tipo de pokemon")
       }
     }
-  }, [pokemonTypes])
+  }, [pokemonTypes, setAllPokemons])
 
   if (error) return <div className="p-2 m-2">Failed to load : {error.message}</div>;
   if (isLoading) return <LoadingSpinner />;
