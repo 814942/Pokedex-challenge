@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
-import Modal from "@/components/molecules/Modal/Modal"
 import LoadingSpinner from "@/components/molecules/Spinner/LoadingSpinner";
 import Card from "@/components/organisms/Card";
 
