@@ -2,9 +2,8 @@
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-import HomePage from "./home/page";
 import { useEffect, useState } from "react";
-import Modal from "@/components/molecules/Modal/Modal";
+import LandingPage from "./pages/landingPage/LandingPage";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState<boolean>(true);
@@ -18,12 +17,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex-col bg-bg-root">
-      {isOpen ?
-        <Modal
-          setIsOpen={setIsOpen}
-        />
-        : <HomePage />
-      }
+      <LandingPage />
       <ToastContainer
         position="top-right"
         autoClose={5000}
