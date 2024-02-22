@@ -41,13 +41,13 @@ const HomePage = () => {
           <div id="navbar" className="border-cs-gray-200 w-full border-b-8 shadow-xl">
           <Navbar />
           </div>
-          <div id="card_list" className="flex flex-wrap justify-between items-center gap-2.5 mt-5 p-4">
+          <div id="card_list" className="flex flex-wrap justify-center items-center gap-16 mt-5 p-4">
             {allPokemons && allPokemons.length && allPokemons.map((pokemon: IPokemonsProps) => {
               return (
                 <div 
                   id="card_list_item"
                   key={pokemon.id}
-                  className="w-[370px] border-[16px] border-solid rounded-2xl border-cs-gray-200 mb-6 shadow-2xl transition-transform duration-300 transform hover:translate-y-4"
+                  className="w-[370px] border-[16px] border-solid rounded-2xl border-cs-gray-200 mb-6 shadow-2xl transition-transform duration-300 transform hover:translate-y-4 hover:translate-x-4"
                 >
                   <Card
                     id={pokemon.id}

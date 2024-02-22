@@ -18,18 +18,24 @@ const Card = ({
 }: IPokemonsProps) => {
   return (
     <div>
-      <div id="card_content" className="shadow-lg flex justify-center bg-cs-white relative max-w-xs overflow-hidden bg-cover bg-no-repeat ">
+      <div id="card_content" className="shadow-lg w-full bg-cs-white relative max-w-xs overflow-hidden bg-cover bg-no-repeat">
         <Link href={`/details/${id}`}>
         {imagen_frente ? 
-          <Image
-            className="max-w-xs transition duration-300 ease-in-out hover:scale-110"
-            loader={() => imagen_frente}
-            src={imagen_frente}
-            alt={nombre}
-            width={200}
-            height={24}
-            priority
-          /> : 
+          <>
+            <div className="pb-2 pt-2 pr-4 bg-secondary text-primary flex justify-end rounded-b-lg">
+              <p>#{" "}{id}</p>
+            </div>
+            <Image
+              className="max-w-xs w-full transition duration-300 ease-in-out hover:scale-110"
+              loader={() => imagen_frente}
+              src={imagen_frente}
+              alt={nombre}
+              width={200}
+              height={24}
+              priority
+            /> 
+          </>
+        : 
           <Image
             src={imgNotFound}
             alt="not found"

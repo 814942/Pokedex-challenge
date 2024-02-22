@@ -87,7 +87,7 @@ const Navbar = () => {
       <TextField onChange={handleChangeInput}/>
       <div>
           <button 
-            className="p-2 m-4 border-2 rounded-2xl border-cs-gray-100 shadow-2xl hover:translate-y-px bg-secondary text-cs-white"
+            className="p-2 border-2 rounded-2xl border-cs-gray-100 shadow-2xl hover:translate-y-px hover:translate-x-px bg-secondary text-cs-white"
             onClick={handleClearFilters}
           >
             Borrar filtros

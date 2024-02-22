@@ -28,7 +28,10 @@ const Details = ({ params }: IDetailsProps) => {
   return pokemon?.data ? (
     <div id="details_container" className="m-20 bg-cs-white shadow-2xl rounded-2xl">
       <div className="flex h-3/4 rounded-2xl">
-        <div id="card_content" className="bg-cs-white w-2/5 bg-secondary border-2 border-solid rounded-2xl shadow-2xl">
+        <div id="card_content" className="relative bg-cs-white w-1/4 bg-secondary border-2 border-solid rounded-2xl shadow-2xl">
+          <div className="pb-2 pt-2 pr-4 text-primary absolute right-0">
+            <p>#{" "}{pokemon?.data!.id}</p>
+          </div>
           <div id="img_container" className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat h-3/4 w-10/12 border-4 border-solid rounded-full border-cs-gray-200 bg-primary p-4 m-4 shadow-xl">
           {pokemon?.data.imagen_frente ?
             <Image
@@ -39,7 +42,8 @@ const Details = ({ params }: IDetailsProps) => {
               width={200}
               height={200}
               priority
-            /> : 
+            />
+          : 
             <Image
               src={imgNotFound}
               alt="not found"
