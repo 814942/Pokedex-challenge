@@ -7,11 +7,11 @@ const login = (req: Request, res: Response) => {
   try {
     const username = req.body.username;
     if (username) {
-      const token = jwt.sign({ username }, `${JWT_SECRET}`, { expiresIn: "1h" });
-      // return { username, token }
+      const token = jwt.sign({ username }, `${JWT_SECRET}`, { expiresIn: "1d" });
+
       return res.status(200).json({ username, token });
     } else {
-      return res.status(401).json({ message: "Autenticación failed" });
+      return res.status(401).json({ message: "Debes escribir un nombre de usuario" });
     }
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });
