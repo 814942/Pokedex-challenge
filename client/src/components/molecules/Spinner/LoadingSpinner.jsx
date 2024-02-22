@@ -6,6 +6,8 @@ const LoadingSpinner = () => (
       className="animate-spin	w-8" 
       alt="Loading..." 
       src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" 
+      width={100}
+      height={100}
     />
   </div>
 )
