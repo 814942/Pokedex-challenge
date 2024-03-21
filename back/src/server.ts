@@ -10,7 +10,7 @@ const { PORT } = process.env
 const server: Express = express();
 const port = PORT || 4000;
 const corsOptions = {
-  "origin": ["http://localhost:3000", "https://pokedex-client-mu.vercel.app/"],
+  "origin": ["http://localhost:3000", "https://pokedex-back-zeta.vercel.app/"],
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "allowedHeaders": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   "credentials": true
