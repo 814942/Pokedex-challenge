@@ -1,4 +1,4 @@
-import express, { Express } from 'express';
+import express, { Express, Request, Response } from 'express';
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from './swagger';
 import cors from "cors";
@@ -20,6 +20,11 @@ const corsOptions = {
 server.use(cors(corsOptions));
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
+
+// welcome
+server.get('/', (req: Request, res: Response) => {
+  res.send("Welcome to my pokedex")
+});
 
 // router
 server.use('/', router);
