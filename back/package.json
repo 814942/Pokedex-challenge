@@ -8,7 +8,7 @@
     "start": "node dist/server.js",
     "dev": "nodemon --watch src src/server.ts",
     "lint": "eslint . --ext .ts",
-    "vercel-build": "echo pablo@garay"
+    "vercel-build": "echo deployment by Pablo Garay"
   },
   "author": "Pablo Garay",
   "license": "ISC",
