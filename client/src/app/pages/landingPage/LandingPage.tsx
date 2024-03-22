@@ -33,6 +33,7 @@ const LandingPage = () => {
   }
 
   const handleSubmit= async () => {
+    console.log("GO")
     mutate("security/login")
   }
 
