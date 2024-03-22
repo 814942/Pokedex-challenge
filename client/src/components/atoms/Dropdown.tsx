@@ -47,7 +47,7 @@ const Dropdown = ({ data, onChange }: IDropdownProps) => {
                 <label className="flex whitespace-nowrap cursor-pointer transition-colors hover:bg-cs-gray-100">
                   <input
                     name={inputName}
-                    value={option.nombre}
+                    defaultValue={option.nombre}
                     className={`cursor-pointer hover:bg-cs-gray-100 px-2 py-1`}
                     onClick={handleDropdown}
                   />
