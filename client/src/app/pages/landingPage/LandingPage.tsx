@@ -33,7 +33,7 @@ const LandingPage = () => {
   }
 
   const handleSubmit= async () => {
-    mutate("/security/login")
+    mutate("security/login")
   }
 
   useEffect(() => {
