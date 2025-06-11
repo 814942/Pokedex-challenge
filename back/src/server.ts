@@ -10,7 +10,7 @@ const { PORT } = process.env
 const server: Express = express();
 const port = PORT || 4000;
 const corsOptions = {
-  "origin": "*",
+  "origin": process.env.FRONTEND_ORIGIN || "*",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "allowedHeaders": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   "credentials": true
