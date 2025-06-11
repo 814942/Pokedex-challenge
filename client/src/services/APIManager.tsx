@@ -7,7 +7,7 @@ export class APIManager {
 
   async login(path: string, username: string): Promise<IRequestProp<string>> {
     try {
-      const { status, data } = await axios.post(`${this.url}${path}`, { username })
+      const { status, data } = await axios.post(`${this.url}${path}`, { username }, { withCredentials: true })
 
       localStorage.setItem("token", data.token)
 
@@ -25,7 +25,8 @@ export class APIManager {
         const { status, data } = await axios.get(`${this.url}${path}`, {
           headers: {
             'Authorization': `Bearer ${token}`
-          }
+          },
+          withCredentials: true
         })
         
         return { status, data: data.data, count: data.count }
@@ -44,7 +45,8 @@ export class APIManager {
         const { status, data } = await axios.get(`${this.url}${path}${pokemon}`, {
           headers: {
             'Authorization': `Bearer ${token}`
-          }
+          },
+          withCredentials: true
         })
         
         return { status, data: data.data, count: data.count }
@@ -63,7 +65,8 @@ export class APIManager {
         const { status, data } = await axios.get(`${this.url}${path}${type}?page=${page}`, {
           headers: {
             'Authorization': `Bearer ${token}`
-          }
+          },
+          withCredentials: true
         })
         
         return { status, data: data.data, count: data.count }
@@ -82,7 +85,8 @@ export class APIManager {
         const { status, data } = await axios.get(`${this.url}${path}`, {
           headers: {
             'Authorization': `Bearer ${token}`
-          }
+          },
+          withCredentials: true
         })
         
         return { status, data: data.data, count: data.count }
